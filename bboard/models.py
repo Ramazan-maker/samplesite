@@ -30,7 +30,7 @@ class MinMaxValueValidator:
 # Create your models here.
 class Rubric(models.Model):
     name = models.CharField(max_length=20, db_index = True, verbose_name='Haзвание', unique =True)
-
+    #slug = models.SlugField(max_length=160, unique=True, verbose_name='Slag')
 
     def __str__(self):
         return self.name

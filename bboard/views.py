@@ -23,6 +23,9 @@ def by_rubric(request, rubric_id):
                "current_rubric": current_rubric}
     return render(request, 'by_rubric.html', context)
 
+def bb_range(request, start_id, end_id):
+    bbs = Bb.objects.filter(id__range=[start_id, end_id])
+    return render(request, 'template/index.html', {'bbs': bbs, 'title': 'Объявления в диапазоне ID'})
 
 class BbCreateView(CreateView):
     template_name = 'create.html'

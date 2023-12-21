@@ -4,22 +4,22 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Main{% endblock %} :: Доска объявлений</title>
+    <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
 
-    <header>
+<header>
     <h1>Объявления</h1>
-    </header>
-<!--{#% url 'by_rubric' rubric.pk %#}-->
-        <nav>
-            <a href="{% url 'index' %}">Главная</a>
-            <a href="{% url 'add' %}">Добавить</a>
-            {% for rubric in rubrics %}
-              <a href="{{ rubric.get_absolute_url }}">{{ rubric}}</a>
-            {% endfor %}
-        </nav>
+</header>
+
+<nav>
+    <a href="{% url 'index' %}">Главная</a>
+    <a href="{% url 'add' %}">Добавить</a>
+    {% for rubric in rubrics %}
+        <a href="{{ rubric.get_absolute_url }}">{{ rubric }} ({{ rubric.cnt }})</a>
+    {% endfor %}
+</nav>
 
 <section>
     {% block content %}

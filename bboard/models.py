@@ -49,6 +49,8 @@ class Rubric(models.Model):
         ordering = ['name']
 
 
+
+
 class Bb(models.Model):
 
     # class Kinds(models.TextChoices):

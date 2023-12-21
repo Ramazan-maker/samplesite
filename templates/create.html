@@ -4,10 +4,12 @@
 
 {% block content %}
     <h1>Добавление объявления</h1>
-
-<form method = 'post'>
+<!--{# <form action="{% url 'bboard:add_save' %}" method="post">#}-->
+<form  method = 'post'>
   {% csrf_token %}
   {{ form.as_p }}
+
+
   <input type="submit" value="Добавить">
 </form>
     {% endblock %}

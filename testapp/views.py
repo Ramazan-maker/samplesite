@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from django.http import StreamingHttpResponse, FileResponse, JsonResponse
 from django.urls import resolve
 from django.views.decorators.http import require_http_methods, require_GET, require_POST, require_safe
+from django.views.generic import TemplateView
 
 from bboard.models import Rubric, Bb
 
@@ -41,10 +42,26 @@ from bboard.models import Rubric, Bb
 # @require_safe() # GET, HEAD
 # @gzip_page()
 
-def index(request):
-    r = get_object_or_404(Rubric, name='Транспорт')
-    bbs = get_list_or_404(Bb, rubric =r)
+# def index(request):
+#     r = get_object_or_404(Rubric, name='Транспорт')
+#     bbs = get_list_or_404(Bb, rubric =r)
+#
+#     res = resolve('/test/')
+#     context = {'title': 'Тестовая страница', 'bbs': bbs, 'res': res}
+#     return render(request, 'test.html', context)
 
-    res = resolve('/test/')
-    context = {'title': 'Тестовая страница', 'bbs': bbs, 'res': res}
-    return render(request, 'test.html', context)
+class IndexView(TemplateView):
+    template_name = 'test.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        rubric = get_object_or_404(Rubric, name='Транспорт')
+        bbs = get_list_or_404(Bb, rubric=rubric)
+        res = resolve('/test/')
+        context['title'] = 'Тестовая страница'
+        context['bbs'] = bbs
+        context['res'] = res
+        return context
+
+
+

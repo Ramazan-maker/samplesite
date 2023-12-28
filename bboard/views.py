@@ -6,22 +6,37 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 
-from .forms import BbForm
+from .forms import BbForm, BbRubric
 from .models import Bb, Rubric
 from django.template import loader
 
-def index(request):
-    bbs = Bb.objects.all()
-    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
-    # rubrics = get_object_or_404(Rubric, name='Транспорт')
-    # bbs = get_list_or_404(Bb, rubric=rubrics)
-    # res = resolve('')
-    context = {'bbs': bbs, 'rubrics': rubrics}
-    # template = get_template('index.html')
-    # return HttpResponse(template.render(context=context, request=request))
-    return HttpResponse(
-        render_to_string('index.html', context, request)
-    )
+# def index(request):
+#     bbs = Bb.objects.all()
+#     rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+#     # rubrics = get_object_or_404(Rubric, name='Транспорт')
+#     # bbs = get_list_or_404(Bb, rubric=rubrics)
+#     # res = resolve('')
+#     context = {'bbs': bbs, 'rubrics': rubrics}
+#     # template = get_template('index.html')
+#     # return HttpResponse(template.render(context=context, request=request))
+#     return HttpResponse(
+#         render_to_string('index.html', context, request)
+#     )
+
+
+class IndexView(TemplateView):
+
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bbs'] = Bb.objects.all()
+        context['rubrics'] = Rubric.objects.all()
+
+        return context
+
+    # def render_to_response(self, context, **response_kwargs):
+    #     return render(self.request, self.template_name, context, **response_kwargs)
 
 
 # def index(request):
@@ -77,30 +92,30 @@ class BbByRubricView(TemplateView):
 #         context = {'form':bbf}
 #         return render(request, 'create.html', context)
 
-# def add_and_save(request):
-#     print(request.headers['Accept-Encoding'])
-#     print(request.headers['accept-Encoding'])
-#     print(request.headers['accept_Encoding'])
-#     print(request.headers['Cookie'])
-#     print(request.resolver_match)
-#     print(request.body)
-#
-#     #if request.header.get("x-request-with") == 'XMLHttpRequest':
-#     if request.method == 'POST':
-#         bbf = BbForm(request.POST)
-#         if bbf.is_valid():
-#             bbf.save()
-#             return HttpResponseRedirect(
-#                 reverse('bboard:by_rubric',
-#                 kwargs={'rubric_id': bbf.cleaned_data['rubric'].pk})
-#             )
-#         else:
-#             context = {'form': bbf}
-#             return render(request, 'create.html', context)
-#     else:
-#         bbf = BbForm()
-#         context = {'form': bbf}
-#         return render(request, 'create.html', context)
+def add_and_save(request):
+    print(request.headers['Accept-Encoding'])
+    print(request.headers['accept-Encoding'])
+    print(request.headers['accept_Encoding'])
+    print(request.headers['Cookie'])
+    print(request.resolver_match)
+    print(request.body)
+
+    #if request.header.get("x-request-with") == 'XMLHttpRequest':
+    if request.method == 'POST':
+        bbf = BbForm(request.POST)
+        if bbf.is_valid():
+            bbf.save()
+            return HttpResponseRedirect(
+                reverse('bboard:by_rubric',
+                kwargs={'rubric_id': bbf.cleaned_data['rubric'].pk})
+            )
+        else:
+            context = {'form': bbf}
+            return render(request, 'create.html', context)
+    else:
+        bbf = BbForm()
+        context = {'form': bbf}
+        return render(request, 'create.html', context)
 
 # class BbCreateView(CreateView):
 #     template_name = 'create.html'
@@ -109,9 +124,20 @@ class BbByRubricView(TemplateView):
 class BbCreateView(CreateView):
     template_name = 'create.html'
     form_class = BbForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('bboard:index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['rubric'] = Rubric.objects.all()
+        return context
+
+
+class BbCreateRubricView(CreateView):
+    template_name = 'createrubric.html'
+    form_class = BbRubric
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #context['rubric'] = Rubric.objects.all()
         return context

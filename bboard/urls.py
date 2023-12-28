@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.urls import path
 
-from .views import (index, by_rubric, BbCreateView,
+from .views import (index, BbByRubricView,#by_rubric, BbCreateView,
                                       #add, add_save,
                                       add_and_save
                                       )
@@ -27,7 +27,9 @@ urlpatterns = [
     # path('add/', add, name='add'),
     path('add/', add_and_save, name='add'),
 
-    path('<int:rubric_id>/', by_rubric, name='by_rubric'),
+    # path('<int:rubric_id>/', by_rubric, name='by_rubric'),
+    path('<int:rubric_id>/', BbByRubricView.as_view(), name='by_rubric'),
+
     path('', index, name = 'index'),
 
     # path('add/comment/', BbCreateView.as_view(), name='add'),

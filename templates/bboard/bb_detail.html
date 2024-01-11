@@ -8,5 +8,8 @@
     <p>Рубрика: {{ bb.rubric.name }}</p>
     <h2> {{ bb.title }}</h2>
     <p>Ценa: {{ bb.price }}</p>
-    
+    <p>
+        <a href ={% url 'bboard:update' bb.pk %}>Изменить</a>
+        <a href ={% url 'bboard:delete' bb.pk %}>Удалить</a>
+    </p>
 {% endblock %}

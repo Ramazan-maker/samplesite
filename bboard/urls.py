@@ -5,7 +5,8 @@ from .views import (#index,
                     # by_rubric,
                     BbCreateView, #add_and_save
                     BbDetailView, #BbAddView
-                    BbEditView, BbDeleteView,BbRedirectView
+                    BbEditView, BbDeleteView,BbRedirectView,
+                    AllUsersView, UserDetailsView
                         )
 
 
@@ -25,4 +26,9 @@ urlpatterns = [
     path('', BbIndexView.as_view(), name='index'),
     path('year/<int:year>/', BbRedirectView.as_view(), name ='redirect'),
     path('<int:year>/<int:month>/', BbMonthView.as_view(), name='month'),
+
+    #homework 19
+    path('all_users/', AllUsersView.as_view(), name='all_users'),
+    path('user_details/<int:user_id>/', UserDetailsView.as_view(), name='user_details'),
+
 ]

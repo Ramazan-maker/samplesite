@@ -16,6 +16,20 @@
         <a href="{% url 'bboard:by_rubric' bb.rubric.pk %}">{{ bb.rubric.name }}</a>
     </p>
     <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+{#      <!-- Кнопка для просмотра всех пользователей -->#}
+{#    <a href="{% url 'bboard:all_users' %}">#}
+{#        <button>All Users</button>#}
+{#    </a>#}
+
 </div>
 {% endfor %}
+
+
+    <!-- Кнопка для просмотра всех пользователей -->
+    <a href="{% url 'bboard:all_users' %}">
+        <button>All Users</button>
+    </a>
+    <a href="{% url 'bboard:user_details' user_id=user.id %}">
+    <button>User Details</button>
+    </a>
 {% endblock %}

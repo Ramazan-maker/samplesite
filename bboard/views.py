@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db.models import Count
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseNotFound, Http404
@@ -6,7 +7,7 @@ from django.template.loader import get_template, render_to_string
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, ArchiveIndexView, MonthArchiveView
 from django.views.generic.detail import DetailView
-from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.base import TemplateView, RedirectView, View
 from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 
 from .forms import BbForm
@@ -126,8 +127,20 @@ class BbCreateView(CreateView):
         context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         return context
 
+#homework19
+class AllUsersView(View):
+    template_name = 'all_users.html'
 
+    def get(self, request):
+        users = User.objects.all()
+        return render(request, self.template_name, {'users': users})
 
+class UserDetailsView(View):
+    template_name = 'user_details.html'
+
+    def get(self, request, user_id):
+        user = User.objects.get(pk=user_id)
+        return render(request, self.template_name, {'user': user, 'current_user': request.user})
 
 # class BbAddView(FormView):
 #     template_name = 'create.html'

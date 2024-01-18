@@ -5,9 +5,10 @@
 {% endblock %}
 
 {% block content %}
-    <p>Рубрика: {{ bb.rubric.name }}</p>
+    <p>Рубрика: {{ bb.rubric.name|capfirst }}</p>
     <h2> {{ bb.title }}</h2>
-    <p>Ценa: {{ bb.price }}</p>
+    <p>{{ bb.content }} ({{ bb.content|wordcount }} words) ({{ bb.content|length }} символов)</p>
+    <p>Ценa: {{ bb.price|floatformat:2 }}</p>
     <p>
         <a href ={% url 'bboard:update' bb.pk %}>Изменить</a>
         <a href ={% url 'bboard:delete' bb.pk %}>Удалить</a>

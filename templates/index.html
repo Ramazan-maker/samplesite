@@ -1,6 +1,8 @@
 {% extends "layout/basic.html" %}
-
 {% block content %}
+    
+    {{ block.super }}
+    
     <p>
     {% for d in date_list %}
         {{ d.year }} /
@@ -12,7 +14,6 @@
 {#<div class="currentclass">#}
 <div class="{% cycle 'b1' 'b2' 'b3' %}">
 {#<div style="background-: {% cycle '#4ac1f7' '#555555' '#f5dd5d' %};">#}
-
     <h2>
         {% url 'bboard:detail' pk=bb.pk as detail_url %}
         <a href="{{ detail_url }}">
@@ -34,8 +35,6 @@
     {% empty %}
     <p>Обьявлений нет!!!</p>
 {% endfor %}
-
-
 {#    <!-- Кнопка для просмотра всех пользователей -->#}
 {#    <a href="{% url 'bboard:all_users' %}">#}
 {#        <button>All Users</button>#}

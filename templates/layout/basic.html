@@ -13,18 +13,11 @@
     <h1>Объявления</h1>
 </header>
 
-<nav>
-    <a href="{% url 'bboard:index' %}">Главная</a>
-    <a href="{% url 'bboard:add' %}">Добавить</a>
-    {% for rubric in rubrics %}
-        <a href="{{ rubric.get_absolute_url }}">{% filter force_escape|upper %}{{ rubric }} {% endfilter %}({{ rubric.cnt }})</a>
-        
-    {% endfor %}
-
-</nav>
+{% include 'includes/inc_main_menu.html' %}
 
 <section>
     {% block content %}
+        <h1>Контент из basic.html</h1>
     {% endblock %}
 </section>
 <footer> &copy;1982 &ndash; {% now 'Y'%}</footer>

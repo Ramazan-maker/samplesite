@@ -2,16 +2,18 @@
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import RedirectView
 from django.views.generic.dates import ArchiveIndexView, MonthArchiveView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from django.contrib.auth import login, authenticate
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from .forms import BbForm
 from .models import Bb, Rubric
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -169,3 +171,37 @@ def add_save(request):
     else:
         context = {'form': bbf}
         return render(request, 'bboard/bb_form.html', context)
+
+
+##homework16
+@login_required(login_url='/user_login/')
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('bboard:index')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration.html', {'form': form})
+
+@login_required(login_url='/user_login/')
+def user_login(request):
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('bboard:index')
+        else:
+            return render(request, 'index.html', {'form': form})
+    else:
+        form = CustomAuthenticationForm()
+    return render(request, 'login.html', {'form': form})

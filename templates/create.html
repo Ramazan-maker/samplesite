@@ -5,10 +5,21 @@
 {% block content %}
 <h2>Добавление объявления</h2>
 
+{% if form.is_multipart %}    
 {#<form action="{% url 'bboard:add_save' %}" method="post">#}
-<form method="post">
+    <form method="post" enctype="multipart/form-data">
+{% else %}
+    <form method="post">
+{% endif %}            
     {% csrf_token %}
-    {{ form.as_p }}
+{#    {{ form.as_p }}#}
+{#    <ul>#}
+{#    {{ form.as_ul }}#}
+{#    </ul>#}
+    <table>
+    {{ form.as_table }}
+    </table>
     <input type="submit" value="Добавить">
+{#    <button type = "submit" class = "btn-check">Добавить</button>#}
 </form>
 {% endblock %}

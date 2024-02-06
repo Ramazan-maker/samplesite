@@ -1,6 +1,8 @@
 
 from django.core.paginator import Paginator
 from django.db.models import Count
+from django.forms import modelformset_factory
+from django.forms.formsets import ORDERING_FIELD_NAME
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
@@ -205,3 +207,28 @@ def user_login(request):
     else:
         form = CustomAuthenticationForm()
     return render(request, 'login.html', {'form': form})
+
+def rubrics(request):
+    RubricFormSet = modelformset_factory(Rubric, fields=('name',), can_order=True, can_delete=True , extra=3)
+
+    if request.method == 'POST':
+        formset = RubricFormSet(request.POST)
+
+        if formset.is_valid():
+            instance = formset.save(commit=False)
+            for obj in formset:
+                if obj.cleaned_data:
+                    rubric = formset.save(commit=False)
+                    rubric.order = obj.cleaned_data[ORDERING_FIELD_NAME]
+                    rubric.save()
+
+            for obj in formset.deleted_objects:
+                obj.delete()
+            return  redirect('bboard:index')
+
+    else:
+        formset = RubricFormSet()
+
+    context = {'formset': formset}
+
+    return render(request,'bboard/rubrics.html', context)

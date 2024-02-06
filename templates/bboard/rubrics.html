@@ -1,0 +1,15 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Изменение рубрик{% endblock %}
+
+{% block content %}
+<h2>Изменение рубрик</h2>
+
+{#<form action="{% url 'bboard:add_save' %}" method="post">#}
+<form method="post">
+    {% csrf_token %}
+
+{#    {{ formset.as_p }}#}
+    <p><button type="submit" class="btn btn-primary">Сохранить</button> </p>
+</form>
+{% endblock %}

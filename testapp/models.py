@@ -24,3 +24,9 @@ class Machine(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
+class Kit(models.Model):
+    machine = models.ForeignKey(Machine, on_delete=models.CASCADE)
+    spare = models.ForeignKey(Spare, on_delete=models.CASCADE)
+    count = models.PositiveIntegerField()
+

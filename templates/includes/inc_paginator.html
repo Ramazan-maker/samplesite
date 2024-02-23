@@ -1,3 +1,5 @@
+{% load bootstrap4 %}
+{% bootstrap_pagination page_obj pages_to_show=3 size="small"%}
 {#    <div>#}
 {#        {% if page.has_previous %}#}
 {#            <a href="?page={{ page.previous_page_number }}">&lt;</a>#}

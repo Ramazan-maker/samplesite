@@ -77,6 +77,7 @@ TEMPLATES = [
                 # 'django.template.context_processors.csrf',
                 'django.template.context_processors.static',
                 # 'django.template.context_processors.media',
+                
             ],
         },
     },

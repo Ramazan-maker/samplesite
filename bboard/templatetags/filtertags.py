@@ -1,3 +1,5 @@
+import random
+
 from django import template
 from django.utils.safestring import mark_safe, SafeText
 from django.utils.html import escape
@@ -38,5 +40,18 @@ def half_cut(value):
 def split_string(value, separator):
     return value.split(separator)
 
+#homework
+@register.filter()
+def uppercase(value, prefix, suffix):
+    return f'{prefix}{value.upper()}{suffix}'
 
+@register.simple_tag()
+def random_price(min_price, max_price):
 
+    return random.randint(min_price, max_price)
+
+def random_text(value):
+    options = ["Lorem ipsum dolor sit amet", "consectetur adipiscing elit", "sed do eiusmod tempor incididunt", "ut labore et dolore magna aliqua"]
+    return random.choice(options)
+
+register.filter('random_text', random_text)

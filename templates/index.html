@@ -10,6 +10,7 @@
 <div>
     <h2>
         <a href="{% url 'bboard:detail' bb.pk %}">
+
 {#            {{ forloop.counter0|add:page.start_index }} - {{ bb.title_and_price }}</a>#}
             {{ forloop.counter0|add:page_obj.start_index }} - {{ bb.title_and_price }}</a>
     </h2>
@@ -22,6 +23,11 @@
         {% for item in "apple,banana,cherry"|split_string:"," %}
             {{ item }}
         {% endfor %}
+        {# homework #}
+     <p>Фильтр для преобразования текста в верхний регистр с добавлением префикса и суффикса: {{  bb.title | upper }}</p>
+        <p>{{ 'Фильтр для преобразования текста в верхний регистр с добавлением префикса и суффикса'| upper }}</p>
+        <p>{{ bb.title }} Случайная цена: {% random_price 10 100 %}</p>
+        <p>Случайный текст: {{ ""|random_text }}</p>
     {% endautoescape %}
     <p>
         <a href="{% url 'bboard:by_rubric' bb.rubric.pk %}">

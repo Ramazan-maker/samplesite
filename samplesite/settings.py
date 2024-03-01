@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'captcha',
     'precise_bbcode',
     'bootstrap4',
-
+    'django_cleanup',
+    'easy_thumbnails',
     'bboard.apps.BboardConfig',  # 'bboard',
     'testapp',
 ]
@@ -95,21 +96,21 @@ WSGI_APPLICATION = 'samplesite.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    #     # 'ATOMIC_REQUEST': False,
-    #     'AUTOCOMMIT': False,
-    # }
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        # "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "12345",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ATOMIC_REQUEST': False,
+        # 'AUTOCOMMIT': False,
     }
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     # "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "NAME": "postgres",
+    #     "USER": "postgres",
+    #     "PASSWORD": "12345",
+    #     "HOST": "127.0.0.1",
+    #     "PORT": "5432",
+    # }
 }
 
 
@@ -202,3 +203,37 @@ BBCODE_SMILIES_UPLOAD_TO = os.path.join('precise_bbcode', 'smilies')
 #     'success_css_class': 'has-success',
 #     'error_css_class': 'has-error',
 # }
+
+
+THUMBNAIL_ALIASES = {
+    'bboard.Bb.picture': {
+        'default': {
+            'size': (500, 300),
+            'croop': 'scale',
+        },
+    },
+    'testapp': {
+        'default': {
+            'size': (400, 300),
+            'crop': 'smart',
+            'bw':True,
+        },
+    },
+    '':{
+        'default': {
+            'size': (180, 240),
+            'crop': 'scale',
+        },
+        'big': {
+            'size': (480, 640),
+            'crop': '10,10'
+        },
+    },
+}
+
+THUMBNAIL_DEFAULT_OPTIONS = {
+    'quality': 90,
+    'subsampling': 1,
+}
+
+THUMBNAIL_PRESERVE_EXTENSION = True  #('png', )

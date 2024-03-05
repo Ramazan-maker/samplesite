@@ -1,46 +1,39 @@
 {% extends "layout/basic.html" %}
 
 {% block content %}
+
     <p>
     {% for d in date_list %}
         {{ d.year }} /
-        <a href = "{% url 'bboard:month' year=d.year month=d.month %}">{{ d.year }} - {{ d.month }}</a>
+        <a href="{% url 'bboard:month' year=d.year month=d.month %}">
+            {{ d.year }} - {{ d.month }}</a>
     {% endfor %}
     </p>
-{% for bb in bbs|dictsort:'price' %}
-{#    {% cycle 'b1' 'b2' 'b3' as currentclass %}#}
-{#<div class="currentclass">#}
-<div class="{% cycle 'b1' 'b2' 'b3' %}">
-{#<div style="background-: {% cycle '#4ac1f7' '#555555' '#f5dd5d' %};">#}
 
-    <h2>
-        {% url 'bboard:detail' pk=bb.pk as detail_url %}
-        <a href="{{ detail_url }}">
-        {#{ bb.title }#}{{ forloop.counter }} - {{ bb.title_and_price }} {% if forloop.first == True %} (Первое обьявление) {% elif forloop.last == True%} (Последнее обьявление) {% endif %}</a></h2>
-    <p>{{ bb.content|truncatewords:5}}</p>
-    {% ifchanged bb.rubric.name %}
-    <p>
-        <a href="{% url 'bboard:by_rubric' bb.rubric.pk %}">{{ bb.rubric.name }}</a>
-    </p>
-    {% endifchanged %}
-    <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
-    {% firstof bb.phone bb.email 'На деревню дедушке'%}
-{#      <!-- Кнопка для просмотра всех пользователей -->#}
-{#    <a href="{% url 'bboard:all_users' %}">#}
-{#        <button>All Users</button>#}
-{#    </a>#}
+    {% for bb in bbs|dictsort:'price' %}
+    <div class="{% cycle 'b1' 'b2' 'b3' %}">
+{#  with тэг #}
+        {% with bb.price|add:50 as adjusted_price %}
+            <h2>{{ bb.title }} (Цена с наценкой: {{ adjusted_price }})</h2>
+        {% endwith %}
+{#     truncatewords тэг   #}
+        <p>{{ bb.content|truncatewords:10 }}</p>
+{# ifchanged тэг    #}
+        {% ifchanged bb.rubric.name %}
+            <p>{{ bb.rubric.name }}</p>
+        {% endifchanged %}
+{# date tag #}
+        <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
 
-</div>
+        {% firstof bb.phone bb.email 'На деревню дедушке' %}
+{# Добавляем цикл с условием для элементов с ценой выше 1000 #}
+        {% for item in items %}
+            {% if item.price > 1000 %}
+                <p>{{ item.name }} - {{ item.price }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
     {% empty %}
-    <p>Обьявлений нет!!!</p>
-{% endfor %}
-
-
-{#    <!-- Кнопка для просмотра всех пользователей -->#}
-{#    <a href="{% url 'bboard:all_users' %}">#}
-{#        <button>All Users</button>#}
-{#    </a>#}
-{#    <a href="{% url 'bboard:user_details' user_id=user.id %}">#}
-{#    <button>User Details</button>#}
-{#    </a>#}
+        <p>Объявлений нет!!!</p>
+    {% endfor %}
 {% endblock %}

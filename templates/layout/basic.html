@@ -1,14 +1,7 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
+{% include 'includes/inc_header.html' %}
 <body>
-
 <header>
     <h1>Объявления</h1>
 </header>
@@ -17,9 +10,10 @@
 
 <section>
     {% block content %}
-        <h1>Контент из basic.html</h1>
+        <p>Контент из basic.html</p>
     {% endblock %}
 </section>
-<footer> &copy;1982 &ndash; {% now 'Y'%}</footer>
+
+{% include 'includes/inc_footer.html' %}
 </body>
-</html>
+</html> 

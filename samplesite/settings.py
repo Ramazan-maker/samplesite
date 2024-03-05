@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3xf9r318pm=l)tzm(mo^df+x5!p@g2j#lf*ag6n7a!r((lw7+z'
+SECRET_KEY = 'django-insecure-djua1s=%lwnp+z%ve%wuf(bg=dl)0egzo54-a9tc97fxoeyp%b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'bboard.apps.BboardConfig',  # 'bboard',
-    'testapp',
+    'bboard.apps.BboardConfig',
+    'testapp.apps.TestappConfig'
 ]
 
 MIDDLEWARE = [
@@ -65,8 +65,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-
             ],
         },
     },
@@ -122,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'static'
 ]
 
 # Default primary key field type
@@ -131,6 +129,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ABSOLUTE_URL_OVERRIDES = {
-#     # 'bboard.rubric': lambda rec: "/%s/" % rec.pk,
-#     'bboard.rubric': lambda rec: f"/{rec.pk}/",
+#     'bboard.rubric': lambda rec: f"/bboard/{rec.pk}/"
 # }

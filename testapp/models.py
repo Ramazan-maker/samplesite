@@ -30,3 +30,10 @@ class Kit(models.Model):
     spare = models.ForeignKey(Spare, on_delete=models.CASCADE)
     count = models.PositiveIntegerField()
 
+# homework 29
+class Employee(models.Model):
+    name = models.CharField(max_length=100)
+
+class Project(models.Model):
+    title = models.CharField(max_length=200)
+    employees = models.ManyToManyField(Employee)

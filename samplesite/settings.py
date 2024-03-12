@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'bboard.apps.BboardConfig',  # 'bboard',
     'testapp',
+    'icecream',
 ]
 
 MIDDLEWARE = [

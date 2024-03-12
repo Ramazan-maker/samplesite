@@ -25,4 +25,6 @@ urlpatterns = [
     path('login/', user_login, name='login'),
 
     path('rubrics/', rubrics, name='rubrics'),
+
+
 ]

@@ -208,27 +208,55 @@ def user_login(request):
         form = CustomAuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def rubrics(request):
-    RubricFormSet = modelformset_factory(Rubric, fields=('name',), can_order=True, can_delete=True , extra=3)
+#homework 27
+# def rubrics(request):
+#     RubricFormSet = modelformset_factory(Rubric, fields=('name',), can_order=True, can_delete=True , extra=3)
+#
+#     if request.method == 'POST':
+#         formset = RubricFormSet(request.POST)
+#
+#         if formset.is_valid():
+#             instance = formset.save(commit=False)
+#             for obj in formset:
+#                 if obj.cleaned_data:
+#                     rubric = formset.save(commit=False)
+#                     rubric.order = obj.cleaned_data[ORDERING_FIELD_NAME]
+#                     rubric.save()
+#
+#             for obj in formset.deleted_objects:
+#                 obj.delete()
+#             return  redirect('bboard:index')
+#
+#     else:
+#         formset = RubricFormSet()
+#
+#     context = {'formset': formset}
+#
+#     return render(request,'bboard/rubrics.html', context)
 
+def rubrics(request):
+    RubricFormSet = modelformset_factory(Rubric, fields=('name',), can_order=True, can_delete=True, extra=3)
     if request.method == 'POST':
         formset = RubricFormSet(request.POST)
-
         if formset.is_valid():
-            instance = formset.save(commit=False)
-            for obj in formset:
-                if obj.cleaned_data:
-                    rubric = formset.save(commit=False)
-                    rubric.order = obj.cleaned_data[ORDERING_FIELD_NAME]
-                    rubric.save()
-
-            for obj in formset.deleted_objects:
-                obj.delete()
-            return  redirect('bboard:index')
-
+            formset.save()
+            return redirect('bboard:index')
     else:
         formset = RubricFormSet()
 
     context = {'formset': formset}
+    return render(request, 'bboard/rubrics.html', context)
+#homework 27
 
-    return render(request,'bboard/rubrics.html', context)
+
+
+# def handle_formset(request):
+#     if request.method == 'POST':
+#         formset = RubricBaseFormSet(request.POST)
+#         if formset.is_valid():
+#             formset.save()  # Сохраняем данные в базу данных
+#             return redirect('success_url')  # Редиректим на страницу успешного сохранения
+#     else:
+#         formset = RubricBaseFormSet()
+#
+#     return render(request, 'rubrics.html', {'formset': formset})

@@ -1,4 +1,4 @@
-# from django.forms import ModelForm, modelform_factory, DecimalField
+from django.forms import ModelForm, modelform_factory, DecimalField
 from django import forms
 from django.core import validators
 from django.contrib.auth.models import User
@@ -81,3 +81,6 @@ class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = get_user_model()
         fields = ('username', 'password')
+
+#homework27
+

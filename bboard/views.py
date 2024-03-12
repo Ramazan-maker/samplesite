@@ -233,6 +233,7 @@ def user_login(request):
 #     context = {'formset': formset}
 #
 #     return render(request,'bboard/rubrics.html', context)
+#homework 27
 
 def rubrics(request):
     RubricFormSet = modelformset_factory(Rubric, fields=('name',), can_order=True, can_delete=True, extra=3)

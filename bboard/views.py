@@ -16,8 +16,8 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import BbForm, RubricBaseFormSet, SearchForm
-from .models import Bb, Rubric
+from .forms import BbForm, RubricBaseFormSet, SearchForm, ContactForm
+from .models import Bb, Rubric, Message
 
 
 def index(request):
@@ -274,3 +274,27 @@ def search(request):
         sf = SearchForm()
     context = {'form': sf}
     return render(request, 'bboard/search.html', context)
+
+
+# homework30
+
+
+# class ContactFormView(CreateView):
+#     template_name = 'contact_form.html'
+#     form_class = ContactForm
+#     success_url = reverse_lazy('thank_you')
+#
+#     def form_valid(self, form):
+#         name = form.cleaned_data['name']
+#         email = form.cleaned_data['email']
+#         message = form.cleaned_data['message']
+#         Message.objects.create(name=name, email=email, message=message)
+#         return super().form_valid(form)
+
+class ContactFormView(CreateView):
+    template_name = 'contact_form.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('thank_you')
+
+    def form_valid(self, form):
+        return super().form_valid(form)

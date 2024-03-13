@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 
 # from django.forms.widgets import Select
 
-from .models import Bb, Rubric
+from .models import Bb, Rubric, Message
 
 
 #  Фабрика классов
@@ -130,3 +130,20 @@ class SearchForm(forms.Form):
 
     error_css_class = 'form-control is-invalid'
     required_css_class = 'required'
+
+
+#homework 30
+
+# class ContactForm(forms.Form):
+#     name = forms.CharField(label='Your Name', max_length=100)
+#     email = forms.EmailField(label='Your Email')
+#     message = forms.CharField(label='Your Message', widget=forms.Textarea)
+#     captcha = CaptchaField()
+
+
+class ContactForm(forms.ModelForm):
+    captcha = CaptchaField()
+
+    class Meta:
+        model = Message
+        fields = ['name', 'email', 'message']

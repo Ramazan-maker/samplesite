@@ -6,6 +6,7 @@
     {% else %}
         <a href="{% url 'bboard:login' %}" class="text-danger">Войти</a>
     {% endif %}
+    <a href="{% url 'bboard:contact_form' %}">Контакты</a>
 {#{{ rubrics.0 }}#}
     {% for rubric in rubrics %}
         {% with bb_count=rubric.cnt %}

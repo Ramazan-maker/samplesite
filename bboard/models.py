@@ -144,3 +144,13 @@ class Bb(models.Model):
         verbose_name = 'Объявление'
         ordering = ['-published', 'title']
         # order_with_respect_to = 'rubric'
+
+#homeworks 30
+class Message(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
+

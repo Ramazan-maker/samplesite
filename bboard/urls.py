@@ -4,7 +4,7 @@ from django.urls import path
 from .views import (  # index,
     BbIndexView, BbMonthView, BbByRubricView,
     BbCreateView, BbDetailView, BbEditView, BbDeleteView,
-    BbRedirectView, edit, add_save, rubrics, bbs, search)
+    BbRedirectView, edit, add_save, rubrics, bbs, search, ContactFormView)
 
 
 app_name = 'bboard'
@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('accounts/login/', LoginView.as_view(), name='login'),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
+    path('contact_form/', ContactFormView.as_view(), name='contact_form'),
 
     path('search/', search, name='search'),
 ]

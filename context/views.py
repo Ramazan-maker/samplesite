@@ -8,3 +8,6 @@ def index(request):
 
 def ticket_view(request):
     return render(request, 'ticket.html')
+
+def login(request):
+    return render(request, 'login.html')

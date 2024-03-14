@@ -10,6 +10,7 @@
     {% bootstrap_alert content="Испавься-warning!" alert_type="warning" %}
     
 <h2>Добавление объявления</h2>
+<<<<<<< HEAD
     
     <form method="post">
     {% csrf_token %}
@@ -27,4 +28,17 @@
     
     </form>
 
+=======
+
+    <form method="post">
+    {% csrf_token %}
+{#    {% bootstrap_form form layout="inline" field_class='col-md-6' size="small"  %}#}
+{#    {% bootstrap_form form %}#}
+{#        {% bootstrap_field form.title placeholder='Пласехолдер' addon_before='Какой-то текст' addon_before_class =''%}#}
+        {% bootstrap_field form.title placeholder='Пласехолдер' addon_after='Какой-то текст' addon_before_class =''%}
+        
+{#    {% buttons submit='Добавить' %}{% endbuttons %}#}
+    {% bootstrap_button content='Добавить' button_type="submit" button_class="btn-primary" %}
+    </form>
+>>>>>>> 965fcd908fce0cf450ad1d76052130757a21fa32
 {% endblock %}

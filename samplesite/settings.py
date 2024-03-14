@@ -184,6 +184,7 @@ BBCODE_ALLOW_CUSTOM_TAGS = True
 BBCODE_ALLOW_SMILIES = True
 BBCODE_SMILIES_UPLOAD_TO = os.path.join('static', 'precise_bbcode', 'smilies')
 
+<<<<<<< HEAD
 
 # BOOTSTRAP4 = {
 #     'horizontal_label_class': 'col-md-3',
@@ -192,3 +193,13 @@ BBCODE_SMILIES_UPLOAD_TO = os.path.join('static', 'precise_bbcode', 'smilies')
 #     'success_css_class': 'has-success',
 #     'error_css_class': 'has-error',
 # }
+=======
+BOOTSTRAP4 = {
+    'horizontal_label_class': "col-md-3",
+    'horizontal_field_class': "col-md-9",
+    'required_css_class': '',
+    'success_css_class': 'has-success',
+    'error_css_class': 'has-error'
+
+}
+>>>>>>> 965fcd908fce0cf450ad1d76052130757a21fa32

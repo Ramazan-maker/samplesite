@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os.path
 from pathlib import Path
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3xf9r318pm=l)tzm(mo^df+x5!p@g2j#lf*ag6n7a!r((lw7+z'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -74,6 +78,7 @@ TEMPLATES = [
         'OPTIONS': {
             # 'file_charset': 'utf-8',
             # 'debug': False,
+            # 'foreign_key': False,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -84,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 # 'django.template.context_processors.media',
                 'bboard.middlewares.rubrics',
+
             ],
             # 'libraries': {
             #     'filtertags': 'bboard.filtertags',
@@ -113,7 +119,7 @@ DATABASES = {
         # "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "12345",
+        "PASSWORD": "123",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
@@ -263,3 +269,25 @@ THUMBNAIL_PRESERVE_EXTENSION = True  # ('png',)
 
 # from django.contrib import messages
 # MESSAGE_LEVEL = messages.DEBUG
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+
+# Only SMTP
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_TIMEOUT = 5 #second
+EMAIL_FILE_PATH = 'tmp/messages/'
+
+ADMINS = [
+    ('admin', 'admin@supersite.kz')
+]
+#
+# MANAGERS = [
+#     ('manager', 'manager@supersite.kz')
+# ]

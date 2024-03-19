@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     'captcha',
-
+    'localflavor',
     'bboard.apps.BboardConfig',  # 'bboard',
     'testapp',
 ]

@@ -13,6 +13,7 @@ from django.forms.formsets import ORDERING_FIELD_NAME
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
+from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 from django.views.generic.dates import ArchiveIndexView, MonthArchiveView
 from django.views.generic.list import ListView
@@ -22,8 +23,9 @@ from precise_bbcode.bbcode import get_parser
 
 from .forms import BbForm, RubricBaseFormSet, SearchForm
 from .models import Bb, Rubric
-
-
+# from django.conf import settings
+# from django.core.cache.backends.base import DEFAULT_TIMEOUT
+# CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 def index(request):
     bbs = Bb.objects.all()
 
@@ -113,7 +115,9 @@ class BbMonthView(MonthArchiveView):
 class BbRedirectView(RedirectView):
     url = '/'
 
-
+# @cache_page(60*5)
+# @cache_page(CACHE_TTL)
+@cache_page(timeout=10*5)
 class BbByRubricView(ListView):
     template_name = 'by_rubric.html'
     context_object_name = 'bbs'

@@ -56,8 +56,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    # 'django.middleware.cache.UpdateCacheMiddleware',#cache
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    # 'django.middleware.cache.FetchFromCacheMiddleware'#cache
+    
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -293,3 +299,39 @@ ADMINS = [
 # MANGERS = [
 #     ('manager', 'manager@supersite.kz'),
 # ]
+
+CACHES = {
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    #     'LOCATION': 'cache1',
+    #     # 'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+    #     # 'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+    #     # 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    #     # 'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+    #     'TIMEOUT': 300,
+    #     'OPTIONS': {
+    #         'MAX_ENTRIES':300,
+    #         'CULL_FREQUENCY': 3,
+    #     }
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+    #     'LOCATION': 'cache_table',
+    #     'TIMEOUT': 120,
+    #     'OPTIONS': {
+    #         'MAX_ENTRIES': 200,
+    #     }
+    # },
+    # 'special': {
+    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    #     'LOCATION': 'cache2',
+    # }
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": env.str("REDIS_URL", "redis://localhost:6379/"),
+        "KEY_PREFIX": "imdb",
+        "TIMEOUT": 60 * 15,  # in seconds: 60 * 15 (15 minutes)
+    }
+}
+# CACHE_TTL = 10 * 15
+# CACHE_MIDDLEWARE_ALIAS = 'default'
+# CACHE_MIDDLEWARE_SECONDS = 600

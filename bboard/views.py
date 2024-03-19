@@ -17,8 +17,11 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import BbForm, RubricBaseFormSet, SearchForm
-from .models import Bb, Rubric
+from .models import Bb, Rubric, Article, Comment
 
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Article, Comment
+from .forms import CommentForm
 
 def index(request):
     bbs = Bb.objects.all()
@@ -274,3 +277,19 @@ def search(request):
         sf = SearchForm()
     context = {'form': sf}
     return render(request, 'bboard/search.html', context)
+
+#homework31
+def article_detail(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    comments = Comment.objects.get_approved_comments().filter(article=article)
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.article = article
+            new_comment.save()
+            return redirect('article_detail', article_id=article_id)
+
+    return render(request, 'article_detail.html', {'article': article, 'comments': comments, 'form': form})

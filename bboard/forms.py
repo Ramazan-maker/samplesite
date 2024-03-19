@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 
 # from django.forms.widgets import Select
 
-from .models import Bb, Rubric
+from .models import Bb, Rubric, Comment
 
 
 #  Фабрика классов
@@ -130,3 +130,9 @@ class SearchForm(forms.Form):
 
     error_css_class = 'form-control is-invalid'
     required_css_class = 'required'
+
+#homework 31
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['author', 'content']

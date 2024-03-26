@@ -18,7 +18,7 @@ urlpatterns = [
     # path('update/<int:pk>/', edit, name='update'),
     path('delete/<int:pk>/', BbDeleteView.as_view(), name='delete'),
 
-    path('<int:rubric_id>/', (BbByRubricView.as_view()), name='by_rubric'),
+    path('<int:rubric_id>/', BbByRubricView.as_view(), name='by_rubric'),
     # path('<int:rubric_id>/', cache_page(10 * 5)(BbByRubricView.as_view()), name='by_rubric'),
     # path('<int:rubric_id>/', cache_page(10*5)(BbByRubricView.as_view()), name='by_rubric'),
 

@@ -117,7 +117,7 @@ class BbRedirectView(RedirectView):
 
 # @cache_page(60*5)
 # @cache_page(CACHE_TTL)
-@cache_page(timeout=10*5)
+# @cache_page(timeout=10*5)
 class BbByRubricView(ListView):
     template_name = 'by_rubric.html'
     context_object_name = 'bbs'

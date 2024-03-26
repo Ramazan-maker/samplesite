@@ -124,16 +124,50 @@ def get_timestamp_path(instance, filename):
     return f'{datetime.now().timestamp()}{splitext(filename)[1]}'
 
 
-class Img(models.Model):
-    # archive = models.FileField(upload_to='archives/')
-    # archive = models.FileField(upload_to='archives/%Y/%m/%d/')
-    # file = models.FileField(upload_to=get_timestamp_path)
+# class Img(models.Model):
+#     # archive = models.FileField(upload_to='archives/')
+#     # archive = models.FileField(upload_to='archives/%Y/%m/%d/')
+#     # file = models.FileField(upload_to=get_timestamp_path)
+#
+#     img = models.ImageField(
+#         verbose_name='Изображение',
+#         upload_to=get_timestamp_path,
+#     )
+#     desc = models.TextField(verbose_name='Описание')
+#     your_file = models.FileField(verbose_name='Файл', upload_to='your_directory/', blank=True, null=True)
+#
+#     def delete(self, *args, **kwargs):
+#         self.img.delete(save=False)
+#         super().delete(*args, **kwargs)
+#
+#     class Meta:
+#         verbose_name = 'Изображение'
+#         verbose_name_plural = 'Изображения'
 
+class Img(models.Model):
     img = models.ImageField(
         verbose_name='Изображение',
         upload_to=get_timestamp_path,
     )
     desc = models.TextField(verbose_name='Описание')
+    your_file = models.FileField(
+        verbose_name='Файл',
+        upload_to='your_directory/',
+        blank=True,
+        null=True
+    )
+    xlsx_file = models.FileField(
+        verbose_name='Файл XLSX',
+        upload_to='xlsx_directory/',
+        blank=True,
+        null=True
+    )
+    pdf_file = models.FileField(
+        verbose_name='Файл PDF',
+        upload_to='pdf_directory/',
+        blank=True,
+        null=True
+    )
 
     def delete(self, *args, **kwargs):
         self.img.delete(save=False)

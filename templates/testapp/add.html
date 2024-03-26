@@ -1,14 +1,27 @@
 {% extends "layout/basic.html" %}
-
 {% block title %}Добавление изображения{% endblock %}
-
 {% block content %}
 <h2>Добавление изображения</h2>
-    
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    
+
     <p><button type="submit" class="btn btn-primary">Добавить</button></p>
 </form>
+
+<h2>Загруженные файлы</h2>
+{% if files %}
+<ul>
+    {% for file in files %}
+    <li>
+        <a href="{{ file.your_file.url }}">{{ file.your_file.name }}</a><br>
+        <a href="{{ file.xlsx_file.url }}">{{ file.xlsx_file.name }}</a><br>
+        <a href="{{ file.pdf_file.url }}">{{ file.pdf_file.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Нет загруженных файлов.</p>
+{% endif %}
 {% endblock %}

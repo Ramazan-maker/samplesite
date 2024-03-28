@@ -51,14 +51,14 @@ class BbForm(forms.ModelForm):
     title = forms.CharField(
         label='Название товара',
         validators=[validators.RegexValidator(regex='^.{4,}$')],
-        error_messages={'invalid': 'Слошком короткое название товара!'}
+        error_messages={'invalid': 'Слишком короткое название товара!'}
     )
-
     price = forms.DecimalField(label='Цена', decimal_places=2)
     rubric = forms.ModelChoiceField(queryset=Rubric.objects.all(),
-                                    label='Рубрика', help_text='Не забудь выбрать рубрику!',
+                                    label='Рубрика', help_text='Не забудьте выбрать рубрику!',
                                     widget=forms.widgets.Select(attrs={'size': 8}))
 
+    picture = forms.ImageField(label='Изображение', required=False)
     # captcha = CaptchaField(
     #     label='Введите текст с картинки',
     #     error_messages={'invalid': 'Неправильный текст'},

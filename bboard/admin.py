@@ -57,7 +57,7 @@ class BbAdmin(admin.ModelAdmin):
     # ordering = ['title', 'rubric']
     # list_filter = ('title', 'rubric__name')
 
-    list_filter = (PriceListFilter)
+    list_filter = (PriceListFilter,)
 
     # list_per_page = 5
     # list_max_show_all = 200

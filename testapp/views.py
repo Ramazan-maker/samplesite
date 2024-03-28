@@ -17,7 +17,10 @@ from testapp.models import Img
 
 FILES_ROOT = os.path.join(BASE_DIR, 'files')
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
 # def index(request):
 #     resp_content = ('Здесь будет', ' главная', ' страница', ' сайта')
 #     resp = StreamingHttpResponse(resp_content, content_type='text/plain; charset=utf-8')
@@ -57,22 +60,35 @@ FILES_ROOT = os.path.join(BASE_DIR, 'files')
 #
 #     return render(request, 'test.html', context)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
 def index(request):
     imgs = []
 
     for entry in os.scandir(FILES_ROOT):
         imgs.append(os.path.basename(entry))
 
+<<<<<<< HEAD
     context = {'title': 'Тестовая страница', 'imgs': imgs}
+=======
+    context = {'title': 'Тестовая страница', 'imgs':imgs}
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
 
     return render(request, 'testapp/index.html', context)
 
 
+<<<<<<< HEAD
 def get(request, filename):
     fn = os.path.join(FILES_ROOT, filename)
     return FileResponse(open(fn, 'rb'),
                         content_type='application/octet-stream')
+=======
+def get(request,filename):
+    fn = os.path.join(FILES_ROOT, filename)
+    return FileResponse(open(fn, 'rb'), content_type='application/octet-stream')
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
 
 
 def add(request):
@@ -80,8 +96,12 @@ def add(request):
         form = ImgForm(request.POST, request.FILES)
         if form.is_valid():
             uploaded_file = request.FILES['img']
+<<<<<<< HEAD
             # fn = '%s%s' % (datetime.now().timestamp(),
             #                os.path.splitext(uploaded_file.name)[1])
+=======
+            # fn = '%s%s' % (datetime.now().timestamp(), os.path.splitext(uploaded_file.name)[1])
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
             fn = f'{datetime.now().timestamp()}{os.path.splitext(uploaded_file.name)[1]}'
             fn = os.path.join(FILES_ROOT, fn)
 

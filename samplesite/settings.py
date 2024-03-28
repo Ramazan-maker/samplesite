@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_cleanup',
     'easy_thumbnails',
+<<<<<<< HEAD
 
+=======
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
     'bboard.apps.BboardConfig',  # 'bboard',
     'testapp',
 ]
@@ -97,21 +100,21 @@ WSGI_APPLICATION = 'samplesite.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    #     # 'ATOMIC_REQUEST': False,
-    #     'AUTOCOMMIT': False,
-    # }
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        # "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "12345",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ATOMIC_REQUEST': False,
+        # 'AUTOCOMMIT': False,
     }
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     # "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "NAME": "postgres",
+    #     "USER": "postgres",
+    #     "PASSWORD": "12345",
+    #     "HOST": "127.0.0.1",
+    #     "PORT": "5432",
+    # }
 }
 
 
@@ -205,21 +208,36 @@ BBCODE_SMILIES_UPLOAD_TO = os.path.join('precise_bbcode', 'smilies')
 #     'error_css_class': 'has-error',
 # }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
 THUMBNAIL_ALIASES = {
     'bboard.Bb.picture': {
         'default': {
             'size': (500, 300),
+<<<<<<< HEAD
             'crop': 'scale',
+=======
+            'croop': 'scale',
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
         },
     },
     'testapp': {
         'default': {
             'size': (400, 300),
             'crop': 'smart',
+<<<<<<< HEAD
             'bw': True,
         },
     },
     '': {
+=======
+            'bw':True,
+        },
+    },
+    '':{
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
         'default': {
             'size': (180, 240),
             'crop': 'scale',
@@ -236,4 +254,8 @@ THUMBNAIL_DEFAULT_OPTIONS = {
     'subsampling': 1,
 }
 
+<<<<<<< HEAD
 THUMBNAIL_PRESERVE_EXTENSION = True  # ('png',)
+=======
+THUMBNAIL_PRESERVE_EXTENSION = True  #('png', )
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2

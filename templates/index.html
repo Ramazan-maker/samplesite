@@ -16,8 +16,13 @@
 {#            {{ forloop.counter0|add:page.start_index }} - {{ bb.title_and_price }}</a>#}
             {{ forloop.counter0|add:page_obj.start_index }} - {{ bb.title_and_price }}</a>
     </h2>
+<<<<<<< HEAD
     
     <img src="{{ bb.picture|thumbnail_url:'default' }}" alt="">
+=======
+
+    <img src="{{ bb.picture|thumbnail_url:'default' }}" alt="">    
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
     
     <p>{{ bb.content|bbcode|safe }}</p>
     

@@ -13,6 +13,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='bb',
             name='picture',
+<<<<<<< HEAD
             field=models.ImageField(blank=True, null=True, upload_to='bb/%Y/%m/%d/', verbose_name='Изображение'),
+=======
+            field=models.ImageField(blank=True, null=True, upload_to='bb/%Y/%m/%d', verbose_name='Изображение'),
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
         ),
     ]

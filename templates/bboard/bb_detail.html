@@ -1,16 +1,25 @@
 {% extends "layout/basic.html" %}
 {% load bbcode_tags %}
 {% load thumbnail %}
+<<<<<<< HEAD
 
+=======
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
 {% block title %}{{ bb.title }}{% endblock %}
 
 {% block content %}
     <p>Рубрика: {{ bb.rubric.name|title }}</p>
     <h2>{{ bb.title }}</h2>
     
+<<<<<<< HEAD
     <img src="{% thumbnail bb.picture 'default' %}" alt="">
     <img src="{% thumbnail bb.picture 'default' bw=True %}" alt="">
     <img src="{% thumbnail bb.picture '300x200' crop='smart' %}" alt="">
+=======
+    <img src = '{% thumbnail bb.picture 'default' %}' alt="">
+    <img src = '{% thumbnail bb.picture 'default' bw=True %}' alt="">
+    <img src = '{% thumbnail bb.picture '300x200' crop='smart' %}' alt="">
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
     
     <h3>bbcode bb.content</h3>
     {% bbcode bb.content %}

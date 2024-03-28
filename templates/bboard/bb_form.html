@@ -1,6 +1,9 @@
 {% extends "layout/basic.html" %}
 {% load thumbnail %}
+<<<<<<< HEAD
 
+=======
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
 {% block title %}Изменение объявления{% endblock %}
 
 {% block content %}
@@ -8,8 +11,12 @@
     
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+<<<<<<< HEAD
 
     <img src="{% thumbnail bb.picture '200x0' %}" alt="">
+=======
+    <img src = '{% thumbnail form.picture 'default' %}' alt="">
+>>>>>>> a1c91d26af02f7a164213b1a68da31456ba370e2
     
     {% for hidden in form.hidden_fields %}
         {{ hidden }}
